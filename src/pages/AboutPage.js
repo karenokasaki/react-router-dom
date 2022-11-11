@@ -12,7 +12,6 @@ function AboutPage() {
 
       <p>Parceria: ENAP</p>
 
-      <Link to="/">Home page</Link>
     </div>
   );
 }
