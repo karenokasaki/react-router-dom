@@ -23,3 +23,18 @@
   font-size: 1.3rem;
   color: white;
 }
+
+.projects {
+  margin: 20px;
+}
+
+.project {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project > p {
+  width: 33%;
+  text-align: start;
+}

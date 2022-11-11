@@ -20,7 +20,11 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<ErrorPage />} />
+
+        <Route path="/projects/:projectID" />
       </Routes>
+
+      
     </div>
   );
 }
