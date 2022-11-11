@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import projects from "../projects.json";
 
-function HomePage() {
-  const [allProjects, setAllProjects] = useState(projects);
+function HomePage({allProjects}) {
+  
 
   /* Não utilizamos a tag <a></a> pois ela RECARREGA A PÁGINA!! */
   /* <a href="/about">About Page</a>
