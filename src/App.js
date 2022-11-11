@@ -4,27 +4,26 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ErrorPage from "./pages/ErrorPage";
 import Navbar from "./components/Navbar";
+import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 
 function App() {
   //path => o caminho da url -> SEM A URL BASE
   //element => qual é a pagina que deve ser renderizada nesse PATH.
   //tudo FORA do <routes></routes> vai permanecer sendo renderizado na tela INDEPENDENTE DA MINHA ROTA!!
 
-
   return (
     <div className="App">
-      
       <Navbar />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+
         <Route path="/about" element={<AboutPage />} />
+
         <Route path="*" element={<ErrorPage />} />
 
-        <Route path="/projects/:projectID" />
+        <Route path="/projects/:projectID" element={<ProjectDetailsPage />} />
       </Routes>
-
-      
     </div>
   );
 }

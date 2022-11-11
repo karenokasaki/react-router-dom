@@ -19,7 +19,7 @@ function HomePage() {
             <p>{project.student}</p>
             <p>{project.projectName}</p>
             <small>{project.id}</small>
-            <Link>Ver mais detalhes</Link>
+            <Link to={`/projects/${project.id}`}>Ver mais detalhes</Link>
           </div>
         );
       })}
