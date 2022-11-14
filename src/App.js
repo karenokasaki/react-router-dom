@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import { useState } from "react";
 import projects from "./projects.json";
+import ApiTeste from "./pages/ApiTeste"
 
 function App() {
   //path => o caminho da url -> SEM A URL BASE
@@ -27,6 +28,8 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
 
         <Route path="/projects/:projectID" element={     <ProjectDetailsPage allProjects={allProjects} />     } />
+
+        <Route path="/api-teste" element={ <ApiTeste /> } />
 
       </Routes>
     </div>
