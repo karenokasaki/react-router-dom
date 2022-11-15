@@ -54,3 +54,8 @@
   padding: 20px;
   width: 250px;
 }
+
+.link {
+  text-decoration: none;
+  color: black;
+}

@@ -6,7 +6,10 @@ function AlunoDetailPage() {
   const { alunoID } = useParams();
   const navigate = useNavigate();
 
-  const [reload, setReload] = useState(false)
+  const [showForm, setShowForm] = useState(false);
+  const [showForm2, setShowForm2] = useState(true);
+
+  const [reload, setReload] = useState(false);
   const [aluno, setAluno] = useState({});
   const [form, setForm] = useState({
     nome: "",
@@ -24,7 +27,7 @@ function AlunoDetailPage() {
         `https://ironrest.herokuapp.com/enap-teste/${alunoID}`
       );
       setAluno(response.data);
-      //preenchendo o form com as informações existentes 
+      //preenchendo o form com as informações existentes
       setForm(response.data);
     }
 
@@ -41,110 +44,125 @@ function AlunoDetailPage() {
   }
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-        //clonar o state para um obj JS
-        const clone = {...form}
-        //deletar a chave _id do obj
-        delete clone._id
+      //clonar o state para um obj JS
+      const clone = { ...form };
+      //deletar a chave _id do obj
+      delete clone._id;
 
-        await axios.put(`https://ironrest.herokuapp.com/enap-teste/${alunoID}`, clone)
-        setReload(!reload)
-
-    } catch(error) {
-        console.log(error)
+      await axios.put(
+        `https://ironrest.herokuapp.com/enap-teste/${alunoID}`,
+        clone
+      );
+      setReload(!reload);
+      setShowForm(false);
+    } catch (error) {
+      console.log(error);
     }
   }
 
   return (
     <div>
       <h1>Estou na pagina de detalhe do aluno</h1>
-      <div>
-        <p>
-          {aluno.nome} - {aluno.idade} anos
-        </p>
-        <p>Profissão: {aluno.profissao}</p>
-        <p>Hobby: {aluno.hobby}</p>
-        <p>
-          {aluno.cidade} - {aluno.estado}
-        </p>
-        <p>Signo: {aluno.signo}</p>
-      </div>
+      <button
+        onClick={() => {
+          setShowForm(!showForm);
+          setReload(!reload);
+        }}
+      >
+        Editar usuário!
+      </button>
+
+      {!showForm && (
+        <div>
+          <p>
+            {aluno.nome} - {aluno.idade} anos
+          </p>
+          <p>Profissão: {aluno.profissao}</p>
+          <p>Hobby: {aluno.hobby}</p>
+          <p>
+            {aluno.cidade} - {aluno.estado}
+          </p>
+          <p>Signo: {aluno.signo}</p>
+        </div>
+      )}
+
+      {showForm === true && (
+        <form>
+          <div>
+            <label>Nome</label>
+            <input
+              type="text"
+              onChange={handleChange}
+              name="nome"
+              value={form.nome}
+            />
+          </div>
+
+          <div>
+            <label>Idade</label>
+            <input
+              type="text"
+              onChange={handleChange}
+              name="idade"
+              value={form.idade}
+            />
+          </div>
+
+          <div>
+            <label>Cidade</label>
+            <input
+              type="text"
+              onChange={handleChange}
+              name="cidade"
+              value={form.cidade}
+            />
+          </div>
+          <div>
+            <label>Estado</label>
+            <input
+              type="text"
+              onChange={handleChange}
+              name="estado"
+              value={form.estado}
+            />
+          </div>
+          <div>
+            <label>Signo</label>
+            <input
+              type="text"
+              onChange={handleChange}
+              name="signo"
+              value={form.signo}
+            />
+          </div>
+          <div>
+            <label>Profissão</label>
+            <input
+              type="text"
+              onChange={handleChange}
+              name="profissao"
+              value={form.profissao}
+            />
+          </div>
+
+          <div>
+            <label>Hobby</label>
+            <input
+              type="text"
+              onChange={handleChange}
+              name="hobby"
+              value={form.hobby}
+            />
+          </div>
+
+          <button onClick={handleSubmit}>Salvar aluno</button>
+        </form>
+      )}
 
       <button onClick={handleDelete}>Deletar usuário!</button>
-
-      <button>Editar usuário!</button>
-      <form>
-        <div>
-          <label>Nome</label>
-          <input
-            type="text"
-            onChange={handleChange}
-            name="nome"
-            value={form.nome}
-          />
-        </div>
-
-        <div>
-          <label>Idade</label>
-          <input
-            type="text"
-            onChange={handleChange}
-            name="idade"
-            value={form.idade}
-          />
-        </div>
-
-        <div>
-          <label>Cidade</label>
-          <input
-            type="text"
-            onChange={handleChange}
-            name="cidade"
-            value={form.cidade}
-          />
-        </div>
-        <div>
-          <label>Estado</label>
-          <input
-            type="text"
-            onChange={handleChange}
-            name="estado"
-            value={form.estado}
-          />
-        </div>
-        <div>
-          <label>Signo</label>
-          <input
-            type="text"
-            onChange={handleChange}
-            name="signo"
-            value={form.signo}
-          />
-        </div>
-        <div>
-          <label>Profissão</label>
-          <input
-            type="text"
-            onChange={handleChange}
-            name="profissao"
-            value={form.profissao}
-          />
-        </div>
-
-        <div>
-          <label>Hobby</label>
-          <input
-            type="text"
-            onChange={handleChange}
-            name="hobby"
-            value={form.hobby}
-          />
-        </div>
-
-        <button onClick={handleSubmit}>Salvar aluno</button>
-      </form>
     </div>
   );
 }

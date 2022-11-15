@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 function ApiTeste() {
+  const [showForm, setShowForm] = useState(false);
+
   const [alunos, setAlunos] = useState([]);
   const [reload, setReload] = useState(false);
   const [form, setForm] = useState({
@@ -60,84 +62,98 @@ function ApiTeste() {
     });
     handleReload();
     toast.success("Aluno criado com sucesso! :D");
+    setShowForm(false);
   }
 
   return (
     <div>
       <h1>Aqui é a página que vamos mostrar a nossa API</h1>
 
-      <form>
-        <div>
-          <label>Nome</label>
-          <input
-            type="text"
-            name="nome"
-            onChange={handleChange}
-            value={form.nome}
-          />
-        </div>
+      
+      <button
+        onClick={() => {
+          setShowForm(!showForm);
+        }}
+      >
+        Criar novo usuário
+      </button>
 
-        <div>
-          <label>Idade</label>
-          <input
-            type="text"
-            name="idade"
-            onChange={handleChange}
-            value={form.idade}
-          />
-        </div>
+      {showForm && (
+        <form>
+          <div>
+            <label>Nome</label>
+            <input
+              type="text"
+              name="nome"
+              onChange={handleChange}
+              value={form.nome}
+            />
+          </div>
 
-        <div>
-          <label>Cidade</label>
-          <input
-            type="text"
-            name="cidade"
-            onChange={handleChange}
-            value={form.cidade}
-          />
-        </div>
-        <div>
-          <label>Estado</label>
-          <input
-            type="text"
-            name="estado"
-            onChange={handleChange}
-            value={form.estado}
-          />
-        </div>
-        <div>
-          <label>Signo</label>
-          <input
-            type="text"
-            name="signo"
-            onChange={handleChange}
-            value={form.signo}
-          />
-        </div>
-        <div>
-          <label>Profissão</label>
-          <input
-            type="text"
-            name="profissao"
-            onChange={handleChange}
-            value={form.profissao}
-          />
-        </div>
+          <div>
+            <label>Idade</label>
+            <input
+              type="text"
+              name="idade"
+              onChange={handleChange}
+              value={form.idade}
+            />
+          </div>
 
-        <div>
-          <label>Hobby</label>
-          <input
-            type="text"
-            name="hobby"
-            onChange={handleChange}
-            value={form.hobby}
-          />
-        </div>
+          <div>
+            <label>Cidade</label>
+            <input
+              type="text"
+              name="cidade"
+              onChange={handleChange}
+              value={form.cidade}
+            />
+          </div>
+          <div>
+            <label>Estado</label>
+            <input
+              type="text"
+              name="estado"
+              onChange={handleChange}
+              value={form.estado}
+            />
+          </div>
+          <div>
+            <label>Signo</label>
+            <input
+              type="text"
+              name="signo"
+              onChange={handleChange}
+              value={form.signo}
+            />
+          </div>
+          <div>
+            <label>Profissão</label>
+            <input
+              type="text"
+              name="profissao"
+              onChange={handleChange}
+              value={form.profissao}
+            />
+          </div>
 
-        <button onClick={handleSubmit}>Salvar aluno</button>
-      </form>
+          <div>
+            <label>Hobby</label>
+            <input
+              type="text"
+              name="hobby"
+              onChange={handleChange}
+              value={form.hobby}
+            />
+          </div>
+
+          <button onClick={handleSubmit}>Salvar aluno</button>
+        </form>
+      )}
 
       <button onClick={handleReload}>Recarregar api!!</button>
+
+      {alunos.length > 14 && <p>Nossa Turma tem 15 pessoas :D</p>}
 
       <div className="cards">
         {alunos.map((aluno) => {
