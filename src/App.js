@@ -8,6 +8,7 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import { useState } from "react";
 import projects from "./projects.json";
 import ApiTeste from "./pages/ApiTeste"
+import AlunoDetailPage from "./pages/AlunoDetailPage";
 
 function App() {
   //path => o caminho da url -> SEM A URL BASE
@@ -30,6 +31,8 @@ function App() {
         <Route path="/projects/:projectID" element={     <ProjectDetailsPage allProjects={allProjects} />     } />
 
         <Route path="/api-teste" element={ <ApiTeste /> } />
+
+        <Route path="/alunos/:alunoID" element={ <AlunoDetailPage /> }/>
 
       </Routes>
     </div>

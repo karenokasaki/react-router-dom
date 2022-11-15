@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function ApiTeste() {
   const [alunos, setAlunos] = useState([]);
@@ -42,15 +43,19 @@ function ApiTeste() {
 
       <button onClick={handleReload}>Recarregar api!!</button>
 
-      {alunos.map((aluno) => {
-        return (
-          <div key={aluno._id}>
-            <p>
-              {aluno.nome} - {aluno.turma}
-            </p>
-          </div>
-        );
-      })}
+      <div className="cards">
+        {alunos.map((aluno) => {
+          return (
+            <div key={aluno._id} className="card">
+              <p>
+                {aluno.nome} - {aluno.idade} anos
+              </p>
+              <p>Profissão: {aluno.profissao}</p>
+              <Link to={`/alunos/${aluno._id}`}>Ver detalhes</Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
