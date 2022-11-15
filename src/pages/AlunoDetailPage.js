@@ -24,6 +24,7 @@ function AlunoDetailPage() {
         `https://ironrest.herokuapp.com/enap-teste/${alunoID}`
       );
       setAluno(response.data);
+      //preenchendo o form com as informações existentes 
       setForm(response.data);
     }
 
@@ -41,6 +42,7 @@ function AlunoDetailPage() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+
     try {
         //clonar o state para um obj JS
         const clone = {...form}
