@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function ApiTeste() {
   const [alunos, setAlunos] = useState([]);
   const [reload, setReload] = useState(false);
+  const [form, setForm] = useState({
+    nome: "",
+    idade: "",
+    cidade: "",
+    estado: "",
+    profissao: "",
+    hobby: "",
+    signo: "",
+  });
 
   //fetch -> api do navegador -> requisições http (get, put, pacth, delete, post) -> axios
   //promisses -> async/await
@@ -26,19 +36,105 @@ function ApiTeste() {
   }, [reload]);
 
   function handleReload() {
+    // reload = false ----> ! => true
+    // reload = true -----> ! => false
     setReload(!reload);
   }
 
-  console.log(alunos);
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    await axios.post("https://ironrest.herokuapp.com/enap-teste", form);
+    setForm({
+      nome: "",
+      idade: "",
+      cidade: "",
+      estado: "",
+      profissao: "",
+      hobby: "",
+      signo: "",
+    });
+    handleReload();
+    toast.success("Aluno criado com sucesso! :D");
+  }
 
   return (
     <div>
       <h1>Aqui é a página que vamos mostrar a nossa API</h1>
 
       <form>
-        <input type="text" placeholder="Escreva seu nome" />
-        <input type="text" placeholder="Qual é a sua turma?" />
-        <button>Salvar aluno</button>
+        <div>
+          <label>Nome</label>
+          <input
+            type="text"
+            name="nome"
+            onChange={handleChange}
+            value={form.nome}
+          />
+        </div>
+
+        <div>
+          <label>Idade</label>
+          <input
+            type="text"
+            name="idade"
+            onChange={handleChange}
+            value={form.idade}
+          />
+        </div>
+
+        <div>
+          <label>Cidade</label>
+          <input
+            type="text"
+            name="cidade"
+            onChange={handleChange}
+            value={form.cidade}
+          />
+        </div>
+        <div>
+          <label>Estado</label>
+          <input
+            type="text"
+            name="estado"
+            onChange={handleChange}
+            value={form.estado}
+          />
+        </div>
+        <div>
+          <label>Signo</label>
+          <input
+            type="text"
+            name="signo"
+            onChange={handleChange}
+            value={form.signo}
+          />
+        </div>
+        <div>
+          <label>Profissão</label>
+          <input
+            type="text"
+            name="profissao"
+            onChange={handleChange}
+            value={form.profissao}
+          />
+        </div>
+
+        <div>
+          <label>Hobby</label>
+          <input
+            type="text"
+            name="hobby"
+            onChange={handleChange}
+            value={form.hobby}
+          />
+        </div>
+
+        <button onClick={handleSubmit}>Salvar aluno</button>
       </form>
 
       <button onClick={handleReload}>Recarregar api!!</button>

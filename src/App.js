@@ -9,6 +9,7 @@ import { useState } from "react";
 import projects from "./projects.json";
 import ApiTeste from "./pages/ApiTeste"
 import AlunoDetailPage from "./pages/AlunoDetailPage";
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   //path => o caminho da url -> SEM A URL BASE
@@ -20,6 +21,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      
+     <Toaster />
 
       <Routes>
         <Route path="/" element={   <HomePage allProjects={allProjects} />    } />

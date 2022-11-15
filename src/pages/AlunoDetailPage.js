@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function AlunoDetailPage() {
   const { alunoID } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [aluno, setAluno] = useState({});
 
@@ -20,8 +20,8 @@ function AlunoDetailPage() {
   }, []);
 
   async function handleDelete(e) {
-    await axios.delete(`https://ironrest.herokuapp.com/enap-teste/${alunoID}`)
-    navigate("/api-teste")
+    await axios.delete(`https://ironrest.herokuapp.com/enap-teste/${alunoID}`);
+    navigate("/api-teste");
   }
 
   return (
@@ -40,6 +40,43 @@ function AlunoDetailPage() {
       </div>
 
       <button onClick={handleDelete}>Deletar usuário!</button>
+      <button>Editar usuário!</button>
+
+      <form>
+        <div>
+          <label>Nome</label>
+          <input type="text" name="nome" />
+        </div>
+
+        <div>
+          <label>Idade</label>
+          <input type="text" name="idade" />
+        </div>
+
+        <div>
+          <label>Cidade</label>
+          <input type="text" name="cidade" />
+        </div>
+        <div>
+          <label>Estado</label>
+          <input type="text" name="estado" />
+        </div>
+        <div>
+          <label>Signo</label>
+          <input type="text" name="signo" />
+        </div>
+        <div>
+          <label>Profissão</label>
+          <input type="text" name="profissao" />
+        </div>
+
+        <div>
+          <label>Hobby</label>
+          <input type="text" name="hobby" />
+        </div>
+
+        <button>Salvar aluno</button>
+      </form>
     </div>
   );
 }
